@@ -1,0 +1,43 @@
+package com.shop.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shop.dto.ProductDTO;
+import com.shop.dto.Response;
+import com.shop.entity.Product;
+import com.shop.service.ProductServiceImpl;
+ 
+@CrossOrigin(origins = "*")
+@RestController
+public class ProductController 
+{
+	@Autowired
+	private ProductServiceImpl productServiceImpl;
+	
+	@GetMapping("/product")
+ 
+	public ResponseEntity<?> findProducts()  
+	{
+		System.out.println("Inside findBlogs");
+		List<ProductDTO> result = new ArrayList<>();
+		result = productServiceImpl.findAllProducts();
+		return Response.success(result);
+	}
+	
+	@GetMapping("/product/{id}")
+	public ResponseEntity<?> findProductById(@PathVariable("id") int id) 
+	{
+		Product result = productServiceImpl.findProductById(id);
+		return Response.success(result);
+	}
+
+
+}
