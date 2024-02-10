@@ -17,6 +17,7 @@ import javax.validation.constraints.Pattern;
 public class User {
 
 	//from pavan
+	//from anup
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;         
